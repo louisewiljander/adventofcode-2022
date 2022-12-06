@@ -1,8 +1,12 @@
-# Opening file in read mode
+# Opening data file in read mode
 inputFile = open(r"C:\Users\lwiljander\VS Code Lab\adventofcode-2022\adventofcode-2022\Day 1\input.txt", "r")
+
+# Opening test file in readmode
+testFile = open(r"C:\Users\lwiljander\VS Code Lab\adventofcode-2022\adventofcode-2022\Day 1\test.txt", "r")
 
 # Creating list of food items (calorie count) from file
 data = inputFile.read().splitlines()
+testData = testFile.read().splitlines()
 
 # Create variable to represent elf
 elf = 0
@@ -13,7 +17,7 @@ elfCalSum = 0
 # Create variable to hold the largest calorie sum
 mostCalories = 0
 
-for i in data:
+for i in testData:
     if i == '':
         elf += 1
         # print("Elf " + str(elf) + "is carrying " + str(elfCalSum) + " calories.")
