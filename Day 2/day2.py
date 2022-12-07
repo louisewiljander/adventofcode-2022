@@ -1,8 +1,17 @@
 ######################## Task 1 ########################
 
-# Player input
-player_input = input("Player, choose your shape:")
-opponent_input = input("Opponent, choose your shape:")
+#------  DATA INPUT ZONE ------#
+
+#player_input = input("Player, choose your shape:")
+#opponent_input = input("Opponent, choose your shape:")
+
+input_file = open(r"C:\Users\lwiljander\VS Code Lab\adventofcode-2022\adventofcode-2022\Day 2\input.txt", "r")
+test_file = open(r"C:\Users\lwiljander\VS Code Lab\adventofcode-2022\adventofcode-2022\Day 2\test.txt", "r")
+
+game = input_file.read().splitlines()
+test_game = test_file.read().splitlines()
+
+#------ FUNCTIONS ------#
 
 # Function to convert encrypted hand value to shape
 def checkShape(hand):
@@ -15,19 +24,7 @@ def checkShape(hand):
         "Z": "Scissors"
     }
 
-    return switch.get(hand, "Wrong input.")
-
-def checkShapePoints(hand):
-    switch = {
-        "A": "Rock",
-        "B": "Paper",
-        "C": "Scissors",
-        "X": "Rock",
-        "Y": "Paper",
-        "Z": "Scissors"
-    }
-
-    return switch.get(hand, "Wrong input.")
+    return switch.get(hand, "Wrong encryption input.")
 
 # Function to convert shape to points
 def shapeToPoints(shape):
@@ -37,9 +34,9 @@ def shapeToPoints(shape):
         "Scissors": 3
     }
 
-    return switch.get(shape, "Wrong input")
+    return switch.get(shape, "Wrong shape input")
 
-# A round of Rock, Paper, Scissors
+# A game round function generating a round result
 def gameRound(player_input, opponent_input):
     player_hand = checkShape(player_input)
     opponent_hand = checkShape(opponent_input)
@@ -52,27 +49,57 @@ def gameRound(player_input, opponent_input):
     elif player_hand == "Rock" and opponent_hand == "Scissors":
         round_result = "Win"
 
+    elif player_hand == "Rock" and opponent_hand == "Paper":
+        round_result = "Loss"
+
     elif player_hand == "Scissors" and opponent_hand == "Paper":
         round_result = "Win"
+
+    elif player_hand == "Scissors" and opponent_hand == "Rock":
+        round_result = "Loss"
     
     elif player_hand == "Paper" and opponent_hand == "Rock":
         round_result = "Win"
-
-    elif player_hand == "Rock" and opponent_hand == "Scissors":
-        round_result = "Win"
     
-    elif player_hand == "Rock" and opponent_hand == "Scissors":
-        round_result = "Win"
+    elif player_hand == "Paper" and opponent_hand == "Scissors":
+        round_result = "Loss"
     
-    elif player_hand == "Rock" and opponent_hand == "Scissors":
-        round_result = "Win"
+    return round_result
 
-# Testing solution
-print(checkShape(player1))
-print(shapeToPoints(checkShape(player1)))
-print(checkShape(player2))
-print(shapeToPoints(checkShape(player2)))
+# Function to convert round result to points
+def resultToPoints(result):
+    switch = {
+        "Win": 6,
+        "Draw": 3,
+        "Loss": 0
+    }
 
+    return switch.get(result, "Wrong result input.")
 
+#------ RUNNING SOLUTION ------#
+points = 0
 
-        
+for i in game:
+    opponent_hand = i[0]
+    player_hand = i[2]
+
+    player_shape = checkShape(player_hand)
+    points += shapeToPoints(player_shape)
+
+    result = gameRound(player_hand, opponent_hand)
+    points += resultToPoints(result)
+
+print(points)
+
+#------ TESTING AREA ------#
+
+#print(test_game)
+
+#print(checkShape(player_input))
+#print(shapeToPoints(checkShape(player_input)))
+
+#print(checkShape(opponent_input))
+#print(shapeToPoints(checkShape(opponent_input)))
+
+#round_result = gameRound(player_input, opponent_input)
+#print(round_result)
