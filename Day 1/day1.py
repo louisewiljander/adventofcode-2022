@@ -63,7 +63,7 @@ def checkTopThree(sum, list):
     
     return list
 
-# Loop through data
+# Loop through data and update list of top three calorie sums
 for i in testData:
     if i == '':
         checkTopThree(elfCalSum, top3List)
@@ -76,10 +76,12 @@ for i in testData:
     else:
         elfCalSum += int(i)
 
-sum = 0
+# Variable to hold value of the top three calorie sums
+totalSum = 0
 
 for i in top3List:
     sum += i
 
+# Print answer
 print(top3List)
 print(sum)
