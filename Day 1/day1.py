@@ -42,61 +42,44 @@ print("mostCalories is: " + str(mostCalories))
 elfCalSum = 0
 
 # Create variables to hold top 3 calorie loads
-top1 = 0
-top2 = 0
-top3 = 0
+top3List = [0,0,0]
 
-"""
-def checkTopThree(sum, top3List):
-    if sum > var1:
-        var3 = var2
-        var2 = var1
-        var1 = sum
+def checkTopThree(sum, list):
+    """
+    Function to take a sum and update list of top 3 values
 
-    elif sum > var2:
-        var3 = var2
-        var2 = sum
+    """
+    if sum > list[0]:
+        list[2] = list[1]
+        list[1] = list[0]
+        list[0] = sum
 
-    elif sum > var3:
-        var3 = sum
-"""
+    elif sum > list[1]:
+        list[2] = list[1]
+        list[1] = sum
+
+    elif sum > list[2]:
+        list[2] = sum
+    
+    return list
 
 # Loop through data
 for i in testData:
     if i == '':
-        if elfCalSum > top1:
-            top3 = top2
-            top2 = top1
-            top1 = elfCalSum
-
-        elif elfCalSum > top2:
-            top3 = top2
-            top2 = elfCalSum
-
-        elif elfCalSum > top3:
-            top3 = elfCalSum
-
+        checkTopThree(elfCalSum, top3List)
         elfCalSum = 0
 
     elif i == testData[-1]:
         elfCalSum += int(i)
-
-        if elfCalSum > top1:
-            top3 = top2
-            top2 = top1
-            top1 = elfCalSum
-
-        elif elfCalSum > top2:
-            top3 = top2
-            top2 = elfCalSum
-
-        elif elfCalSum > top3:
-            top3 = elfCalSum
+        checkTopThree(elfCalSum, top3List)
     
     else:
         elfCalSum += int(i)
 
-print(top1)
-print(top2)
-print(top3)
-print(top1+top2+top3)
+sum = 0
+
+for i in top3List:
+    sum += i
+
+print(top3List)
+print(sum)
