@@ -1,5 +1,3 @@
-######################## Task 1 ########################
-
 #------  DATA INPUT ZONE ------#
 
 #player_input = input("Player, choose your shape:")
@@ -10,6 +8,8 @@ test_file = open(r"C:\Users\lwiljander\VS Code Lab\adventofcode-2022\adventofcod
 
 game = input_file.read().splitlines()
 test_game = test_file.read().splitlines()
+
+######################## Task 1 ########################
 
 #------ FUNCTIONS ------#
 
@@ -91,7 +91,66 @@ for i in game:
 
 print(points)
 
-#------ TESTING AREA ------#
+######################## Task 2 ########################
+
+#------ FUNCTIONS ------#
+def checkStrategy(code):
+    switch = {
+        "X": "Loss",
+        "Y": "Draw",
+        "Z": "Win"
+    }
+
+    return switch.get(code, "Wrong strategy input.")
+
+def pickLosingShape(opponent_shape):
+    switch = {
+        "Rock": "Scissors",
+        "Paper": "Rock",
+        "Scissors": "Paper"
+    }
+
+    return switch.get(opponent_shape, "Wrong shape input.")
+
+def pickWinningShape(opponent_shape):
+    switch = {
+        "Rock": "Paper",
+        "Paper": "Scissors",
+        "Scissors": "Rock"
+    }
+
+    return switch.get(opponent_shape, "Wrong shape input.")
+
+#------ RUNNING SOLUTION ------#
+points = 0
+
+for i in game:
+    opponent_hand = i[0]
+    inputStrategy = i[2]
+
+    strategy = checkStrategy(inputStrategy)
+
+    if strategy == "Loss":
+        opponent_shape = checkShape(opponent_hand)
+        player_shape = pickLosingShape(opponent_shape)
+        points += shapeToPoints(player_shape)
+        points += resultToPoints("Loss")
+
+    elif strategy == "Win":
+        opponent_shape = checkShape(opponent_hand)
+        player_shape = pickWinningShape(opponent_shape)
+        points += shapeToPoints(player_shape)
+        points += resultToPoints("Win")
+    
+    elif strategy == "Draw":
+        opponent_shape = checkShape(opponent_hand)
+        player_shape = opponent_shape
+        points += shapeToPoints(player_shape)
+        points += resultToPoints("Draw")
+
+print(points)
+
+#------ TEST/PRINTING AREA ------#
 
 #print(test_game)
 
