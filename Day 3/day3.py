@@ -51,9 +51,29 @@ print(sum_priorities)
 ######################## Task 2 ########################
 
 #------ FUNCTIONS ------#
+def get_badge(a, b, c):
+    a_set = set(a)
+    b_set = set(b)
+    c_set = set(c)
 
+    if (a_set & b_set & c_set):
+        return a_set & b_set & c_set
+    else:
+        return "No common elements"
 
 #------ RUNNING SOLUTION ------#
+sum_priorities = 0
 
-#------ TEST/PRINTING AREA ------#
+# Split elfs into groups of three
+start = 0
+end = len(rucksacks)
+step = 3
+for i in range(start, end, step):
+    x = i
+    elf_group = rucksacks[x:x+step]
+    badge = ', '.join(get_badge(elf_group[0], elf_group[1], elf_group[2]))
+    priority = getPriority(badge)
+    sum_priorities += priority
+
+print(sum_priorities)
 
