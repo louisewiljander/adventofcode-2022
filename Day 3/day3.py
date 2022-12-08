@@ -64,7 +64,7 @@ def get_badge(a, b, c):
 #------ RUNNING SOLUTION ------#
 sum_priorities = 0
 
-# Split elfs into groups of three
+# Split elves into groups of three
 start = 0
 end = len(rucksacks)
 step = 3
