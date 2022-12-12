@@ -7,9 +7,6 @@ test_pairs = test_file.read().splitlines()
 
 ######################## Task 1 ########################
 
-#------ FUNCTIONS ------#
-
-
 #------ RUNNING SOLUTION ------#
 counter = 0
 
@@ -28,6 +25,29 @@ for i in assignment_pairs:
     elif a >= x and b <= y:
         counter += 1
 
+    else:
+        continue
+
+print(counter)
+
+######################## Task 2 ########################
+
+#------ RUNNING SOLUTION ------#
+counter = 0
+
+for i in assignment_pairs:    
+    i = i.split(",")
+    pair1 = i[0].split("-")
+    a = int(pair1[0])
+    b = int(pair1[1])
+    pair2 = i[1].split("-")
+    x = int(pair2[0])
+    y = int(pair2[1])
+
+    if a in range(x, y+1) or b in range(x,y+1):
+        counter += 1
+    elif x in range(a, b+1) or y in range(a, b+1):
+        counter += 1
     else:
         continue
 
